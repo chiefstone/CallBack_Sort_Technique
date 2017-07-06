@@ -1,20 +1,21 @@
+// SortDll.cpp : Defines the exported functions for the DLL application.
 //#include "stdafx.h"
 #include "SortDll.h"
 #include <cstdio>
 
-void SORTDLL_API __stdcall Bubblesort(byte* array, int size, int elem_size, CompareFunction cmpFunc)
+void SORTDLL_API __stdcall Bubblesort_1(byte* Mem_Loc, int size, int sizeD, CompareFunction CMP_funct)
 {
 	for(int i=0; i<size; i++)
 	{
 		for(int j=0; j<size-1; j++)
 		{
-			if(1 == (*cmpFunc)(array + j * elem_size , array+(j+1) * elem_size))
+			if(1 == (*CMP_funct)(Mem_Loc + j * sizeD , Mem_Loc+(j+1) * sizeD))
 			{
-				byte* temp = new byte[elem_size];
+				byte* temp = new byte[sizeD];
 				//Memory Swap---------------------------------------------------
-				memcpy(temp, array+j*elem_size, elem_size);
-				memcpy(array+j*elem_size, array+(j+1)*elem_size, elem_size);
-				memcpy(array+(j+1)*elem_size, temp, elem_size);
+				memcpy(temp, Mem_Loc + j * sizeD, sizeD);
+				memcpy(Mem_Loc + j * sizeD, Mem_Loc + (j+1) * sizeD, sizeD);
+				memcpy(Mem_Loc + (j+1) * sizeD, temp, sizeD);
 				//--------------------------------------------------------------
 				delete [] temp;
 			}
